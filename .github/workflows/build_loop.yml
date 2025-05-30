@@ -16,7 +16,7 @@ env:
   TARGET_BRANCH: ${{ github.ref_name }} # target branch on fork to be kept in sync, and target branch on upstream to be kept alive (replace with specific branch name if needed)
   ALIVE_BRANCH_MAIN: alive-main
   ALIVE_BRANCH_DEV: alive-dev
-  SCHEDULED_SYNC: 'false'
+  # SCHEDULED_SYNC: 'false'
 
 jobs:
   validate:
@@ -194,7 +194,7 @@ jobs:
       contents: write
     if:
       | # runs if started manually, or if sync schedule is set and enabled and scheduled on the first Saturday each month, or if sync schedule is set and enabled and new commits were found
-      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_dispatch' && 'true' == 'false') || # [REAL] I ADDED TRUE == FALSE TO BYPASS THIS CRAP
       (needs.check_alive_and_permissions.outputs.WORKFLOW_PERMISSION == 'true' &&
         (vars.SCHEDULED_BUILD != 'false' && github.event.schedule == '0 6 1 * *') ||
         (vars.SCHEDULED_SYNC != 'false' && needs.check_latest_from_upstream.outputs.NEW_COMMITS == 'true' )
