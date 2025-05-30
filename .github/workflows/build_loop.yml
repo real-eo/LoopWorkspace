@@ -326,4 +326,3 @@ jobs:
           name: build-artifacts
           path: |
             artifacts
-            buildlog
