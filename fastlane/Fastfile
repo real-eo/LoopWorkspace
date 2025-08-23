@@ -50,7 +50,9 @@ platform :ios do
       xcodeproj: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
       build_number: current_build_number
     )      
-    
+
+    ENV["MATCH_READONLY"] = false.to_s      # Attempted fix for build error
+
     match(
       type: "appstore",
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
