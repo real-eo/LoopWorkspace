@@ -51,6 +51,8 @@ platform :ios do
       build_number: current_build_number
     )      
 
+    ENV["MATCH_READONLY"] = false.to_s     # Attempt to fix build errors
+
     match(
       type: "appstore",
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
